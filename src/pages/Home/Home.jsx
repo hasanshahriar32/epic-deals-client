@@ -1,11 +1,15 @@
+import BannerSlider from "../../components/BannerSlider";
+import AdvertiseItems from "./advertiseItems/AdvertiseItems";
+
+
 
 const Home = () => {
 
 
     return (
         <div>
-            this is home of . epic deals 
-           
+           <BannerSlider></BannerSlider>
+           <AdvertiseItems></AdvertiseItems>
         </div>
     );
 };

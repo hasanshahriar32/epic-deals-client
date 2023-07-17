@@ -13,6 +13,7 @@ import MyBuyers from "../pages/dashboard/seller/MyBuyers";
 import MyProduct from "../pages/dashboard/seller/MyProduct";
 import SignIn from "../shared/signIn/SignIn";
 import PageNotFound from "../shared/PageNotFound";
+import About from "../pages/about/About";
 
 
 
@@ -28,6 +29,14 @@ const router = createBrowserRouter([
             {
                 path:'/blogs',
                 element:<Blogs></Blogs>
+            },
+            {
+                path:'/usedProduct',
+                element:<div>product</div>
+            },
+            {
+                path:'/about',
+                element:<About></About>
             },
             {
                 path:'/signIn',
