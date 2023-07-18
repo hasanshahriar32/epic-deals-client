@@ -1,13 +1,24 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import mainLogo from '../assets/mainLogo.png'
+import { AuthContext } from '../context/AuthContextElements';
 
 
 
 
 const Navbar = () => {
 
+    const {user,userSignOUt} = useContext(AuthContext)
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleSignOut =()=>{
+      userSignOUt()
+      
+    }
+
+
+    
     return (
   
     <div className="bg-gray-900">
@@ -54,10 +65,28 @@ const Navbar = () => {
                 About us
               </Link>
             </li>
+            <li>
+              {
+                user && 
+                <Link
+                to='/dashboard'
+                className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-amber-600"
+              >
+                Dashboard
+              </Link>
+              }
+            </li>
           </ul>
           <ul className="flex items-center hidden space-x-8 lg:flex">
             <li>
-              <Link
+              {
+                user? 
+
+                <button onClick={handleSignOut} className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-white
+                transition hover:-rotate-2 hover:scale-110 outline focus:ring-amber-600 active:bg-amber-800">signOUt</button>
+                :
+
+                <Link
                 to='/signIn'
                 className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-white
                 transition hover:-rotate-2 hover:scale-110 outline focus:ring-amber-600 active:bg-amber-800"
@@ -65,8 +94,16 @@ const Navbar = () => {
               >
                 Sign up
               </Link>
+
+              }
             </li>
           </ul>
+
+
+
+
+
+          {/* dropdow function is here */}
           <div className="lg:hidden">
             <button
               

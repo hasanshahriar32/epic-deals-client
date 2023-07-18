@@ -11,9 +11,10 @@ import MyOrder from "../pages/dashboard/regularUser/MyOrder";
 import AddProduct from "../pages/dashboard/seller/AddProduct";
 import MyBuyers from "../pages/dashboard/seller/MyBuyers";
 import MyProduct from "../pages/dashboard/seller/MyProduct";
-import SignIn from "../shared/signIn/SignIn";
+import SignIn from "../pages/signIn/SignIn";
 import PageNotFound from "../shared/PageNotFound";
 import About from "../pages/about/About";
+import SignUp from "../pages/signIn/SignUp";
 
 
 
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             {
                 path:'/signIn',
                 element:<SignIn></SignIn>
+            },
+            {
+                path:'/signUp',
+                element:<SignUp></SignUp>
             },
             
         ]
