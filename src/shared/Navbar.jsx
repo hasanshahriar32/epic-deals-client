@@ -14,7 +14,6 @@ const Navbar = () => {
 
     const handleSignOut =()=>{
       userSignOUt()
-      
     }
 
 
@@ -104,7 +103,7 @@ const Navbar = () => {
 
 
           {/* dropdow function is here */}
-          <div className="lg:hidden">
+          <div className="lg:hidden z-20">
             <button
               
               className="p-2 -mr-1 transition duration-200 rounded focus:outline-none focus:shadow-outline"

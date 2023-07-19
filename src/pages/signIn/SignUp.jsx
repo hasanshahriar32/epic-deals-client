@@ -34,9 +34,12 @@ const SignUp = () => {
             const uploadedImage = userPhoto[0];
             uploadPhoto(uploadedImage)
             // console.log(user);
+            // savedata to database fun call 
+            saveUserData(userData)
             setLoading(false)
             reset()
             toast.success("User Register Successfully")
+            console.log('userdata',userData);
         })
         .catch(err => {
             toast.error(err.message)
@@ -71,6 +74,22 @@ const SignUp = () => {
 
 
 
+    // user Data save to database 
+    const saveUserData=(userData)=>{
+        const url = 'http://localhost:5000/createUser';
+        fetch(url,{
+            method:'post',
+            headers:{"Content-Type": "application/json"},
+            body:JSON.stringify(userData)
+            
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(error=>console.error(error))
+    }
+
+
+
 
 
     return (
@@ -98,7 +117,6 @@ const SignUp = () => {
                         <label className="block text-gray-400">Select User Type</label>
                         <select {...register('userType',{required:"you must put the type info"})} className="select select-bordered text-gray-400 bg-gray-600 w-full ">
                             
-                            <option>Regular</option>
                             <option>Seller</option>
                             <option>Buyer</option>
                         </select>
