@@ -1,7 +1,8 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import mainLogo from '../assets/mainLogo.png'
 import { AuthContext } from '../context/AuthContextElements';
+import useUserType from '../hooks/useUserType';
 
 
 
@@ -9,12 +10,15 @@ import { AuthContext } from '../context/AuthContextElements';
 const Navbar = () => {
 
     const {user,userSignOUt} = useContext(AuthContext)
-
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate()
 
     const handleSignOut =()=>{
       userSignOUt()
+      navigate('/')
     }
+
+    const [userType,loading] = useUserType(user?.email)
 
 
     
@@ -65,10 +69,30 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
+              {/* user will be redirect according to userType */}
               {
-                user && 
+                userType === 'Admin' && 
                 <Link
-                to='/dashboard'
+                to='/dashboard/admin/allSellers'
+                className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-amber-600"
+              >
+                Dashboard
+              </Link>
+              }
+              {
+                userType === 'Buyer' && 
+                <Link
+                to='/dashboard/regular/myOrder'
+                className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-amber-600"
+              >
+                Dashboard
+              </Link>
+              }
+             
+              {
+                userType === 'Seller' && 
+                <Link
+                to='/dashboard/seller/myProduct'
                 className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-amber-600"
               >
                 Dashboard

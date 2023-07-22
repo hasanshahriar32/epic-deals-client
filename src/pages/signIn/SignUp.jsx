@@ -1,6 +1,6 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContextElements";
 import { toast } from "react-hot-toast";
 import SmallSpinner from "../../components/SmallSpinner";
@@ -8,55 +8,24 @@ import SmallSpinner from "../../components/SmallSpinner";
 const SignUp = () => {
 
     const {userRegister,updatesUserInfo,loading,setLoading} = useContext(AuthContext)
-
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
-    const [uploadPhotoURL,setUploadPhotoURL] = useState()
+    const navigate = useNavigate()
+  
+
+
+
+// here 3 kind of task will be process ==> 1. imgBB  2. firebase 3.MongoDB
+
+const handleSignUp = (data) => {
+    const {userName,email,userType,userPhoto,password}=data;
+    setLoading(true)
+
+      // upload the user image to imagBB to get the url for DATABASE
     
-
-    const handleSignUp = (data) => {
-    const {name,email,userType,userPhoto,password}=data;
-    
- 
-        const userData = {
-            name,
-            email,
-            userType,
-            userImage:uploadPhotoURL,
-            password
-        }
-
-        userRegister(email, password)
-        .then(result => {
-            const user = result?.user;
-            // profile updates by dispalyName (firebase)
-            updatesUserInfo(name)
-            // call imgBB function
-            const uploadedImage = userPhoto[0];
-            uploadPhoto(uploadedImage)
-            // console.log(user);
-            // savedata to database fun call 
-            saveUserData(userData)
-            setLoading(false)
-            reset()
-            toast.success("User Register Successfully")
-            console.log('userdata',userData);
-        })
-        .catch(err => {
-            toast.error(err.message)
-            // console.log(err.message)
-        })
-
-        
-    }
-
-
-
-    // upload the user image to imagBB to get the url for save data in database
-    const uploadPhoto=(image)=>{
         const apiKey = 'b1668bca15c70ef4cb7797c42ee66610'
         const url = `https://api.imgbb.com/1/upload?key=${apiKey}`
         const formData = new FormData();
-        formData.append('image', image);
+        formData.append('image', userPhoto[0] );
   
         fetch(url, {
           method: 'POST',
@@ -64,15 +33,46 @@ const SignUp = () => {
         })
           .then(res => res.json())
           .then(result => {
-            // set the url in a state
-            setUploadPhotoURL(result.data.url)
+
+            if(result.success){
+                const uploadedPhotoURL = result.data.url;
+                // Sign up with firebase and save data to Database (by call this function )
+                registerAndSaveUser(userName,email,password,userType,uploadedPhotoURL)
+                toast.success('photo uploaded')
+
+            } 
           })
           .catch(error => {
-            console.error('Error:', error);
+            console.error('Error:', error)
+            toast.error('somthing error in img upload fun')
           });
-    }
+    
+}
 
 
+
+//firebase all fuction 
+const registerAndSaveUser = (userName,email,password,userType,uploadedPhotoURL) =>{
+
+    
+        userRegister(email, password)
+        .then(result => {
+            const user = result?.user;
+                if(user){
+                    updatesUserInfo(userName) //update name in firebase
+                    toast.success('user registered')
+
+                    // call MongoDB fuction
+                    const userData = {userName,email,userType,uploadedPhotoURL}
+                    saveUserData(userData)
+                    
+                }
+           
+        })
+        .catch(err => {
+            toast.error(err.message)
+        })
+}
 
     // user Data save to database 
     const saveUserData=(userData)=>{
@@ -84,9 +84,17 @@ const SignUp = () => {
             
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            // console.log(data);
+            setLoading(false)
+            reset()
+            toast.success("Save data in Database Successfully")
+            navigate('/')
+
+        })
         .catch(error=>console.error(error))
     }
+
 
 
 
@@ -100,7 +108,7 @@ const SignUp = () => {
                 <form onSubmit={handleSubmit(handleSignUp)}  className="space-y-6">
                     <div className="space-y-1 text-sm">
                         <label className="block text-gray-400">Username</label>
-                        <input type="text" {...register('name',{required:'required'})} placeholder="Username" className="w-full px-4 py-3 rounded-md bg-gray-600 text-gray-100 border-violet-400" />
+                        <input type="text" {...register('userName',{required:'required'})} placeholder="Username" className="w-full px-4 py-3 rounded-md bg-gray-600 text-gray-100 border-violet-400" />
                         {errors?.name && <p className="text-red-600">{errors.name?.message}</p>}
                     </div>
                     <div className="space-y-1 text-sm">

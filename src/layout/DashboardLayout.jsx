@@ -25,12 +25,15 @@ const DashboardLayout = () => {
                     {/* Page content here */}
                    
                     <Outlet></Outlet>
+
+
+
                     <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
                 
                 </div> 
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-                    <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
+                    <ul className="menu p-4 w-80 h-full bg-base-200  text-amber-600 font-semibold">
                     {/* Sidebar content here */}
                     {/* <li><a>Sidebar Item 1</a></li> */}
                     {
@@ -54,7 +57,7 @@ const DashboardLayout = () => {
                     }
 
 
-
+                        <li><Link to='/dashboard/userProfile'>My Profile</Link></li>
 
 
 

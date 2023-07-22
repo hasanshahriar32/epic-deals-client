@@ -1,7 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
 import Home from "../pages/Home/Home";
-import DashboardHome from "../pages/dashboard/DashboardHome";
 import DashboardLayout from "../layout/DashboardLayout";
 import Blogs from "../pages/blogs/Blogs";
 import AllSeller from "../pages/dashboard/admin/AllSeller";
@@ -15,6 +14,7 @@ import SignIn from "../pages/signIn/SignIn";
 import PageNotFound from "../shared/PageNotFound";
 import About from "../pages/about/About";
 import SignUp from "../pages/signIn/SignUp";
+import UserProfile from "../pages/dashboard/UserProfile";
 
 
 
@@ -55,8 +55,8 @@ const router = createBrowserRouter([
         element:<DashboardLayout></DashboardLayout>,
         children:[
             {
-                path:'/dashboard',
-                element:<DashboardHome></DashboardHome>
+                path:'/dashboard/userProfile',
+                element: <UserProfile></UserProfile>
             },
 
             // admin route
