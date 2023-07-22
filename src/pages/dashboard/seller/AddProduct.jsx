@@ -21,7 +21,7 @@ const AddProduct = () => {
 
     const handleAddProduct = (data) =>{
         setButtonLoading(true)
-        const {productName,productDetails,productCondition,price } = data
+        const {productName,productDetails,categories,productCondition,price } = data
 
      
 
@@ -45,6 +45,7 @@ const AddProduct = () => {
                     const productData = {
                         productName,
                         productDetails,
+                        categories,
                         productCondition,
                         price,
                         sellerEmail: user.email,
@@ -59,9 +60,6 @@ const AddProduct = () => {
                 console.error('Error:', error)
                 toast.error('somthing error in img upload fun')
               });
-
-
-
 
  }
 
@@ -137,6 +135,21 @@ const AddProduct = () => {
                             <div className="relative">
                             <select
                                 className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+                                {...register("categories", { required: true })}
+                              
+                            >
+                                    <option>Furniture</option>
+                                    <option>Clothes</option>
+                                    <option>Gadgets</option>
+                            </select>
+                            {errors.categories && <span className="text-red-500 text-xs">This field is required</span>}
+                            </div>
+
+
+                            
+                            <div className="relative">
+                            <select
+                                className="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
                                 {...register("productCondition", { required: true })}
                               
                             >
@@ -187,7 +200,7 @@ const AddProduct = () => {
 
         <div className="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
             <img
-            alt="Welcome"
+            alt="Welcome add your product"
             src={loadingStiker}
             className="absolute inset-0 h-full w-full object-cover"
             />

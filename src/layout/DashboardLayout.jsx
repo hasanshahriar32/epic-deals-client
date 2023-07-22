@@ -33,7 +33,7 @@ const DashboardLayout = () => {
                 </div> 
                 <div className="drawer-side">
                     <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
-                    <ul className="menu p-4 w-80 h-full bg-base-200  text-amber-600 font-semibold">
+                    <ul className="menu p-4 w-80 h-full bg-base-200  text-amber-600 font-semiboldP">
                     {/* Sidebar content here */}
                     {/* <li><a>Sidebar Item 1</a></li> */}
                     {
