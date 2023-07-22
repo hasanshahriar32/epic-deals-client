@@ -13,12 +13,12 @@ const UserProfile = () => {
             const res = await fetch(`http://localhost:5000/user?email=${user?.email}`)
             const data = res.json()
             return data
-        }
-
-       
-        
+        }    
     })
    console.log(userProfile);
+
+
+   
 
 
     return (

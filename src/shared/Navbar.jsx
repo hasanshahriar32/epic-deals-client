@@ -106,7 +106,7 @@ const Navbar = () => {
                 user? 
 
                 <button onClick={handleSignOut} className="inline-flex items-center justify-center h-10 px-6 font-medium tracking-wide text-white
-                transition hover:-rotate-2 hover:scale-110 outline focus:ring-amber-600 active:bg-amber-800">signOUt</button>
+                transition hover:-rotate-2 hover:scale-110 outline focus:ring-amber-600 active:bg-amber-800">signOut</button>
                 :
 
                 <Link
