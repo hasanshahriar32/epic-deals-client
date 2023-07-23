@@ -87,7 +87,7 @@ const MyProduct = () => {
 
                                         <td>
                                             <button className='btn btn-xs text-red-500'><AiOutlineDelete/></button>
-                                            <button onClick={()=>addtoAdvertise()} className='btn btn-xs  '>add to advertise</button>
+                                            <button onClick={()=>addtoAdvertise()} className='btn btn-xs '>add to hot-deals</button>
                                         </td>
                                     </tr>
                                     )

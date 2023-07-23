@@ -1,6 +1,22 @@
 import SingleItem from "./SingleItem";
+import Slider from "react-slick";
+
 
 const HotDealsOfTheDay = () => {
+  
+      const settings = {
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 5000,
+        speed: 5000,
+        cssEase: "linear"
+      };
+
+
+
+
   
     return (
           <div className=" bg-zinc-200"> 
@@ -10,11 +26,24 @@ const HotDealsOfTheDay = () => {
                 Hot <span className='text-amber-600'>Deals</span> For Today
                 </h2>
 
-             <div className="flex flex-wrap gap-4">
-                <SingleItem></SingleItem>
-                <SingleItem></SingleItem>
-                <SingleItem></SingleItem>
-                <SingleItem></SingleItem>
+             <div className="">
+               
+                <Slider {...settings}>
+                  
+                  <div><SingleItem></SingleItem></div>
+                  <div><SingleItem></SingleItem></div>
+                  <div><SingleItem></SingleItem></div>
+                  <div><SingleItem></SingleItem></div>
+                  <div><SingleItem></SingleItem></div>
+                  <div><SingleItem></SingleItem></div>
+                  <div><SingleItem></SingleItem></div>
+                  <div><SingleItem></SingleItem></div>
+                  <div><SingleItem></SingleItem></div>
+                  <div><SingleItem></SingleItem></div>
+                  <div><SingleItem></SingleItem></div>
+                
+               </Slider>
+             
             </div>
            </div>
           </div>

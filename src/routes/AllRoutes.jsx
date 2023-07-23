@@ -15,6 +15,7 @@ import PageNotFound from "../shared/PageNotFound";
 import About from "../pages/about/About";
 import SignUp from "../pages/signIn/SignUp";
 import UserProfile from "../pages/dashboard/UserProfile";
+import CategoriesProduct from "../pages/categoriesProduct/CategoriesProduct";
 
 
 
@@ -46,6 +47,12 @@ const router = createBrowserRouter([
             {
                 path:'/signUp',
                 element:<SignUp></SignUp>
+            },
+            {
+                path:'/categoriProduct/:categori',
+                loader:async({params})=>await fetch(`http://localhost:5000/categoriProduct/${params.categori}`),
+                element:<CategoriesProduct></CategoriesProduct>
+                // http://localhost:5000/
             },
             
         ]

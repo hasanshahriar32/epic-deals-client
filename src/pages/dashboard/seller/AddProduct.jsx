@@ -9,7 +9,7 @@ import SmallSpinner from "../../../components/SmallSpinner";
 const AddProduct = () => {
 
     // dnd
-    const fileTypes = ["JPEG", "PNG", "GIF"];
+    const fileTypes = ["JPEG","JPG", "PNG", "GIF"];
     const [file, setFile] = useState(null);
     const handleChange = (photo) => {
     setFile(photo);

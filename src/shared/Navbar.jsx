@@ -18,6 +18,7 @@ const Navbar = () => {
       navigate('/')
     }
 
+    // custom hook
     const [userType,loading] = useUserType(user?.email)
 
 
@@ -29,6 +30,7 @@ const Navbar = () => {
         <div className="relative flex items-center justify-between">
           <Link
             className="inline-flex items-center"
+            to='/'
           >
             <img className='w-14' src={mainLogo} alt="mainLogo" />
             <span className="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
