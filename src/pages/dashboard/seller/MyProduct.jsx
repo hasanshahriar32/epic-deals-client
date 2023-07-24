@@ -3,13 +3,14 @@ import { useQuery } from 'react-query';
 import { AuthContext } from '../../../context/AuthContextElements';
 import BigSpinner from '../../../components/BigSpinner';
 import { AiOutlineDelete } from 'react-icons/ai';
+import { toast } from 'react-hot-toast';
 
 const MyProduct = () => {
 
 
     const {user}= useContext(AuthContext)
 
-    const { data=[],isLoading }=useQuery({
+    const { data=[],isLoading,refetch }=useQuery({
         queryKey:[user?.email],
         queryFn: async() => {
             const res = await fetch(`http://localhost:5000/sellingProduct?email=${user?.email}`)
@@ -19,13 +20,21 @@ const MyProduct = () => {
     })
     const sellingProduct = data?.data;
 
-
-    // this product will add to advertise 
-    const addtoAdvertise = () =>{
-        alert('coming soon')
+// add to hot deals / advertise 
+    const handleHotDeals = (id)=>{
+        fetch(`http://localhost:5000/product/${id}`,{
+            method:'put',
+            headers:{"Content-Type": "application/json"}
+        })
+        .then(res => res.json())
+        .then(result => {
+            if(result.success){
+                // console.log(result.data);
+                toast.success('product added to hotdeals')
+                refetch()
+            }
+        })
     }
-
-
 
 
     if(isLoading){
@@ -87,7 +96,9 @@ const MyProduct = () => {
 
                                         <td>
                                             <button className='btn btn-xs text-red-500'><AiOutlineDelete/></button>
-                                            <button onClick={()=>addtoAdvertise()} className='btn btn-xs '>add to hot-deals</button>
+                                            {
+                                              !product.addOnHotDeals && <button onClick={()=>handleHotDeals(product._id)} className='btn btn-xs '>add to hot-deals</button>
+                                            }
                                         </td>
                                     </tr>
                                     )

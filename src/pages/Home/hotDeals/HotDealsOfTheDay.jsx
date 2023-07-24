@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import SingleItem from "./SingleItem";
 import Slider from "react-slick";
 
@@ -15,7 +16,13 @@ const HotDealsOfTheDay = () => {
       };
 
 
-
+      useEffect(()=>{
+         fetch('http://localhost:5000/')
+         .then(res => res.json())
+         .then(result => {
+            console.log(result.data);
+         })
+      },[])
 
   
     return (
@@ -30,17 +37,13 @@ const HotDealsOfTheDay = () => {
                
                 <Slider {...settings}>
                   
-                  <div><SingleItem></SingleItem></div>
-                  <div><SingleItem></SingleItem></div>
-                  <div><SingleItem></SingleItem></div>
-                  <div><SingleItem></SingleItem></div>
-                  <div><SingleItem></SingleItem></div>
-                  <div><SingleItem></SingleItem></div>
-                  <div><SingleItem></SingleItem></div>
-                  <div><SingleItem></SingleItem></div>
-                  <div><SingleItem></SingleItem></div>
-                  <div><SingleItem></SingleItem></div>
-                  <div><SingleItem></SingleItem></div>
+                  <SingleItem></SingleItem>
+                  <SingleItem></SingleItem>
+                  <SingleItem></SingleItem>
+                  <SingleItem></SingleItem>
+                  <SingleItem></SingleItem>
+                  <SingleItem></SingleItem>
+           
                 
                </Slider>
              
