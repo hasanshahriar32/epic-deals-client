@@ -4,7 +4,7 @@ import SingleProductCard from "./SingleProductCard";
 const CategoriesProduct = () => {
 
     const products = useLoaderData()
-    console.log(products);
+    // console.log(products);
 
     return (
         <div className="container m-auto py-8">

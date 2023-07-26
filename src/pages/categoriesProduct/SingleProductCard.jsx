@@ -2,7 +2,26 @@ import { AiOutlineStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const SingleProductCard =({product}) => {
-    console.log(product);
+    // console.log(product);
+
+    const previousItemofLocalStorage = localStorage.getItem('products')
+    const item = JSON.parse(previousItemofLocalStorage)
+
+   const  addtoCard =(product)=>{
+
+ 
+
+    
+    const products = [{name:product.productName, id:product._id}]
+    localStorage.setItem('products',JSON.stringify(products))
+
+    
+    
+   }
+
+
+
+
     return (
      
                <div className="flex flex-col shadow-xl">
@@ -15,6 +34,7 @@ const SingleProductCard =({product}) => {
                     <div className="flex flex-wrap justify-between pt-3 space-x-2 text-xs">
                         <span className="text-amber-600">Price : {product.price}</span>
                         <button className="btn btn-xs"><Link>Details</Link></button>
+                        <button onClick={()=>addtoCard(product)} className='btn btn-xs'>Add to cart</button>
                     </div>
                 </div>
             </div>
